@@ -11,6 +11,6 @@ int fatorial_iterativo (int n) {
 }
 
 int fatorial_recursivo (int n) {
-    if (n == 0 || n == 1) return 1;
-    else return fatorial_recursivo(n) * fatorial_recursivo(n-1);
+    if (n == 0) return 1;
+    else return n * fatorial_recursivo(n-1);
 }

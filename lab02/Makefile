@@ -9,7 +9,8 @@
 #---------------------------------------------------------------------
 
 CC = gcc
-LIBS = -lm
+# LIBS = -lm
+LIBS = -lstdc++
 SRC = src
 OBJ = obj
 INC = include
