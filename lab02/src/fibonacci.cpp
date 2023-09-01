@@ -5,13 +5,12 @@
 int fibonacci_iterativo(int n) {
     if (n <= 0) {
         return 0;  // Tratar
-    } else if (n == 1) {
+    } else if (n == 1 || n == 2) {
         return 1;  // Tratar?
     }
-
-    int x1 = 0, x2 = 1;
+    int x1 = 1, x2 = 1;
     int x;
-    for (int i = 2; i <= n; i++) {
+    for (int i = 3; i <= n; i++) {
         x = x1 + x2;
         x2 = x1;
         x1 = x;
