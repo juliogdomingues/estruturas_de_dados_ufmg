@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 
 #include "../include/fibonacci.hpp"
 
@@ -21,6 +22,6 @@ int fibonacci_iterativo(int n) {
 int fibonacci_recursivo (int n) {
     if (n == 0 || n == 1) return n;
     else {
-        return fibonacci_recursivo(n-1) + fibonacci_recursivo(n-2);
+        return fibonacci_recursivo(n) + fibonacci_recursivo(n-1);
     }
 }
