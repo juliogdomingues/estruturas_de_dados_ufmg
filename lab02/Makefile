@@ -17,7 +17,7 @@ INC = include
 BIN = bin
 OBJS = $(OBJ)/main.o $(OBJ)/fatorial.o $(OBJ)/fibonacci.o 
 HDRS = $(INC)/fatorial.hpp $(INC)/fibonacci.hpp
-CFLAGS = -Wall -c -I$(INC)
+CFLAGS = -Wall -pg -c -I$(INC)
 
 EXE = $(BIN)/main
 
