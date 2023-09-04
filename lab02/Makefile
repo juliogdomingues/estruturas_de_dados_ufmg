@@ -1,12 +1,3 @@
-#---------------------------------------------------------------------
-# Arquivo	: Makefile
-# Conteúdo	: compilar o programa analisamem
-# Autor		: Wagner Meira Jr. (meira@dcc.ufmg.br)
-# Histórico	: 2021-10-30 - arquivo criado
-#---------------------------------------------------------------------
-# Opções	: make all - compila tudo
-#		: make clean - remove objetos e executável
-#---------------------------------------------------------------------
 
 CC = gcc
 # LIBS = -lm
@@ -15,15 +6,28 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/fatorial.o $(OBJ)/fibonacci.o 
-HDRS = $(INC)/fatorial.hpp $(INC)/fibonacci.hpp
+OBJS = $(OBJ)/main.o $(OBJ)/fatorial.o $(OBJ)/fibonacci.o $(OBJ)/time_count.o 
+HDRS = $(INC)/fatorial.hpp $(INC)/fibonacci.hpp $(INC)/time_count.hpp
 CFLAGS = -Wall -pg -c -I$(INC)
 
 EXE = $(BIN)/main
 
-run: all
+all: run
 
-all:  $(EXE)
+run:  $(EXE)
+	$(EXE) -t 5
+	$(EXE) -b 5
+
+gprof: $(EXE)
+	$(EXE) -t 20
+	gprof $(EXE) gmon.out > gprof_report_fatorial.txt
+
+	$(EXE) -b 20
+	gprof $(EXE) gmon.out > gprof_report_fibonacci.txt
+
+exp:  $(EXE)
+	$(EXE) -t 20
+	$(EXE) -b 20
 
 $(BIN)/main: $(OBJS)
 	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)
@@ -36,6 +40,9 @@ $(OBJ)/fatorial.o: $(HDRS) $(SRC)/fatorial.cpp
 
 $(OBJ)/fibonacci.o: $(HDRS) $(SRC)/fibonacci.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/fibonacci.o $(SRC)/fibonacci.cpp 
+
+$(OBJ)/time_count.o: $(HDRS) $(SRC)/time_count.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/time_count.o $(SRC)/time_count.cpp 
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
