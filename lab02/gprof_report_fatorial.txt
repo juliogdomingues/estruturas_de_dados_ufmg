@@ -3,7 +3,7 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
-100.31      0.07     0.07       21     3.34     3.34  fatorial_recursivo_mod(int)
+100.29      0.07     0.07       21     3.34     3.34  fatorial_recursivo_mod(int)
   0.00      0.07     0.00       41     0.00     0.00  fatorial_recursivo(int)
   0.00      0.07     0.00       21     0.00     0.00  fatorial_iterativo(int)
   0.00      0.07     0.00        3     0.00     0.00  start_count()

@@ -15,19 +15,19 @@ EXE = $(BIN)/main
 all: run
 
 run:  $(EXE)
-	$(EXE) -t -n 5
-	$(EXE) -b -n 5
+	$(EXE) -t 5
+	$(EXE) -b 5
 
 gprof: $(EXE)
-	$(EXE) -t -n 20
+	$(EXE) -t 20
 	gprof $(EXE) gmon.out > gprof_report_fatorial.txt
 
-	$(EXE) -b -n 20
+	$(EXE) -b 20
 	gprof $(EXE) gmon.out > gprof_report_fibonacci.txt
 
 exp:  $(EXE)
-	$(EXE) -t -n 20
-	$(EXE) -b -n 20
+	$(EXE) -t 20
+	$(EXE) -b 20
 
 $(BIN)/main: $(OBJS)
 	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)

@@ -16,7 +16,7 @@
 // variaveis globais para opcoes
 static int opescolhida;
 char outnome[100];
-int optn;
+int optn, optnt, optnb;
 
 void parse_args(int argc,char ** argv)
 // Descricao: le as opcoes da linha de comando e inicializa variaveis
@@ -32,29 +32,27 @@ void parse_args(int argc,char ** argv)
 
      // inicializacao variaveis globais para opcoes
      opescolhida = -1;
-     optn = -1;
+     optnt = -1;
+     optnb = -1;
      outnome[0] = 0;
 
      // getopt - letra indica a opcao, : junto a letra indica parametro
      // no caso de escolher mais de uma operacao, vale a ultima
-     while ((c = getopt(argc, argv, "btn:")) != -1){
-    //  while ((c = getopt(argc, argv, "tb:n:lh")) != -1 && optind < argc - 1) {
+     while ((c = getopt(argc, argv, "b:t:")) != -1){
        switch(c) {
          case 't':
             avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
 	          opescolhida = OPFATORIAL;
+              optnt = atoi(optarg)+1;
             break;
          case 'b':
             avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
 	          opescolhida = OPFIBONACCI;
+              optnb = atoi(optarg);
             break;
-         case 'n': 
-	          optn = atoi(optarg)+1;
-		        break;
          default:
                 // uso();
                 exit(1);
-
        }
      }
      
@@ -73,25 +71,22 @@ int main(int argc, char ** argv) {
         case OPFATORIAL:
             start_count();
             std::cout << "Fatorial Iterativo" << std::endl;
-            for (int i = 0; i < optn; i++) {
-                std::cout << "n = " << i << std::endl;
-                std::cout << fatorial_iterativo(i) << std::endl;
+            for (int i = 0; i < optnt; i++) {
+                std::cout << "n = " << i << " --> " << fatorial_iterativo(i) << std::endl;
             }
             end_count();
 
             start_count();
-            std::cout << "Fatorial recursivo" << std::endl;
-            for (int i = 0; i < optn; i++) {
-                std::cout << "n = " << i << std::endl;
-                std::cout << fatorial_recursivo(i) << std::endl;
+            std::cout << "Fatorial Recursivo" << std::endl;
+            for (int i = 0; i < optnt; i++) {
+                std::cout << "n = " << i << " --> " << fatorial_recursivo(i) << std::endl;
             }
             end_count();
 
             start_count();
-            std::cout << "Fatorial recursivo modificado" << std::endl;
-            for (int i = 0; i < optn; i++) {
-                std::cout << "n = " << i << std::endl;
-                std::cout << fatorial_recursivo_mod(i) << std::endl;
+            std::cout << "Fatorial Recursivo Modificado" << std::endl;
+            for (int i = 0; i < optnt; i++) {
+                std::cout << "n = " << i << " --> " << fatorial_recursivo_mod(i) << std::endl;
             }
             end_count();
             break;
@@ -99,25 +94,22 @@ int main(int argc, char ** argv) {
         case OPFIBONACCI:
             start_count();
             std::cout << "Fibonacci Iterativo" << std::endl;
-            for (int i = 0; i < optn; i++) {
-                std::cout << "n = " << i << std::endl;
-                std::cout << "Iterativo = " << fibonacci_iterativo(i) << std::endl;
+            for (int i = 1; i <= optnb; i++) {
+                std::cout << "n = " << i << " --> " << fibonacci_iterativo(i) << std::endl;
             }
             end_count();
 
             start_count();
-            std::cout << "Fibonacci recursivo" << std::endl;
-            for (int i = 0; i < optn; i++) {
-                std::cout << "n = " << i << std::endl;
-                std::cout << "Recursivo = " << fibonacci_recursivo(i) << std::endl;
+            std::cout << "Fibonacci Recursivo" << std::endl;
+            for (int i = 1; i <= optnb; i++) {
+                std::cout << "n = " << i << " --> " << fibonacci_recursivo(i) << std::endl;
             }
             end_count();
 
             start_count();
-            std::cout << "Fibonacci recursivo modificado" << std::endl;
-            for (int i = 0; i < optn; i++) {
-                std::cout << "n = " << i << std::endl;
-                std::cout << "Recursivo modificado = " << fibonacci_recursivo_mod(i) << std::endl;
+            std::cout << "Fibonacci Recursivo Modificado" << std::endl;
+            for (int i = 1; i <= optnb; i++) {
+                std::cout << "n = " << i << " --> " << fibonacci_recursivo_mod(i) << std::endl;
             }
             end_count();
             break;
@@ -126,8 +118,5 @@ int main(int argc, char ** argv) {
             // uso();
             exit(1);
     }
-
-    // Limpeza do buffer de entrada
-  // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
