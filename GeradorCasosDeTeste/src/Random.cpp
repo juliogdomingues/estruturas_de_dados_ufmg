@@ -12,7 +12,7 @@ double Random::Double(){
 }
 
 int Random::Int(int max){
-    return rand() % (max);
+    return (max == 0) ? 0 : rand() % (max);
 }
 
 vector<int> Random::Permutation(int n)

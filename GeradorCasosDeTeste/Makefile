@@ -24,3 +24,8 @@ default: $(OUT)
 clean:
 	rm $(OBJ)/*.o
 	rm $(BIN)/*
+
+tests:
+	make all
+	reset
+	valgrind --leak-check=full ./bin/out.exe

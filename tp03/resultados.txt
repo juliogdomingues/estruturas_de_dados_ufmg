@@ -1,0 +1,1 @@
+Tempo de execução para o método 1: 205 microssegundos
