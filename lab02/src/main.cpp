@@ -37,23 +37,23 @@ void parse_args(int argc,char ** argv)
 
      // getopt - letra indica a opcao, : junto a letra indica parametro
      // no caso de escolher mais de uma operacao, vale a ultima
-     while ((c = getopt(argc, argv, "tc:n:lh")) != EOF){
+     while ((c = getopt(argc, argv, "btn:")) != -1){
+    //  while ((c = getopt(argc, argv, "tb:n:lh")) != -1 && optind < argc - 1) {
        switch(c) {
          case 't':
-		  avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
+            avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
 	          opescolhida = OPFATORIAL;
-                  break;
-         case 'c':
-		  avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
+            break;
+         case 'b':
+            avisoAssert(opescolhida==-1,"Mais de uma operacao escolhida");
 	          opescolhida = OPFIBONACCI;
-                  break;
+            break;
          case 'n': 
 	          optn = atoi(optarg)+1;
-		  break;
-         case 'h':
+		        break;
          default:
-                  // uso();
-                  exit(1);
+                // uso();
+                exit(1);
 
        }
      }
@@ -94,7 +94,7 @@ int main(int argc, char ** argv) {
                 std::cout << fatorial_recursivo_mod(i) << std::endl;
             }
             end_count();
-            // break;
+            break;
 
         case OPFIBONACCI:
             start_count();
@@ -114,13 +114,15 @@ int main(int argc, char ** argv) {
             end_count();
 
             start_count();
+            std::cout << "optn = " << optn << std::endl;
+
             std::cout << "Fibonacci recursivo modificado" << std::endl;
             for (int i = 0; i < optn; i++) {
                 std::cout << "n = " << i << std::endl;
                 std::cout << "Recursivo modificado = " << fibonacci_recursivo_mod(i) << std::endl;
             }
             end_count();
-            // break;
+            break;
         default:
          // nao deve ser executado, pois ha um erroAssert em parse_args
             // uso();
@@ -130,3 +132,4 @@ int main(int argc, char ** argv) {
     // Limpeza do buffer de entrada
   // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
+
