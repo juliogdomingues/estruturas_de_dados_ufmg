@@ -107,9 +107,16 @@ int main(int argc, char ** argv) {
             end_count();
 
             start_count();
+<<<<<<< HEAD
             std::cout << "Fibonacci Recursivo Modificado" << std::endl;
             for (int i = 1; i <= optnb; i++) {
                 std::cout << "n = " << i << " --> " << fibonacci_recursivo_mod(i) << std::endl;
+=======
+            std::cout << "Fibonacci recursivo modificado" << std::endl;
+            for (int i = 0; i < optn; i++) {
+                std::cout << "n = " << i << std::endl;
+                std::cout << "Recursivo modificado = " << fibonacci_recursivo_mod(i) << std::endl;
+>>>>>>> 9648259 (minor change in main)
             }
             end_count();
             break;
