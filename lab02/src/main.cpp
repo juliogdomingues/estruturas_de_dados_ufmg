@@ -114,8 +114,6 @@ int main(int argc, char ** argv) {
             end_count();
 
             start_count();
-            std::cout << "optn = " << optn << std::endl;
-
             std::cout << "Fibonacci recursivo modificado" << std::endl;
             for (int i = 0; i < optn; i++) {
                 std::cout << "n = " << i << std::endl;
