@@ -15,8 +15,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/fatorial.o $(OBJ)/fibonacci.o 
-HDRS = $(INC)/fatorial.hpp $(INC)/fibonacci.hpp
+OBJS = $(OBJ)/main.o $(OBJ)/fatorial.o $(OBJ)/fibonacci.o $(OBJ)/time_count.o 
+HDRS = $(INC)/fatorial.hpp $(INC)/fibonacci.hpp $(INC)/time_count.hpp
 CFLAGS = -Wall -pg -c -I$(INC)
 
 EXE = $(BIN)/main
@@ -24,6 +24,8 @@ EXE = $(BIN)/main
 run: all
 
 all:  $(EXE)
+	$(EXE) -t -n 20
+	$(EXE) -c -n 20
 
 $(BIN)/main: $(OBJS)
 	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)
@@ -36,6 +38,9 @@ $(OBJ)/fatorial.o: $(HDRS) $(SRC)/fatorial.cpp
 
 $(OBJ)/fibonacci.o: $(HDRS) $(SRC)/fibonacci.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/fibonacci.o $(SRC)/fibonacci.cpp 
+
+$(OBJ)/time_count.o: $(HDRS) $(SRC)/time_count.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/time_count.o $(SRC)/time_count.cpp 
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
