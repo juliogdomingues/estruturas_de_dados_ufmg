@@ -31,7 +31,7 @@ int fibonacci_recursivo_mod (int n) {
     else {
         double result = 0.0;
         for (int i = 0; i < 1000000; i++) {
-            result += std::sin(1.0); // Calculate sine of 1.0 repeatedly
+            result += std::sin(1.0); // Calcula seno de 1 repetidamente
         } 
         return fibonacci_recursivo(n-1) + fibonacci_recursivo(n-2);
     }
