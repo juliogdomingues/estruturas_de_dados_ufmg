@@ -1,0 +1,47 @@
+# Compilar versão sem correção
+gcc -g -o cX.out cX.c
+
+# Corrigir o código e compilar versão corrigida
+gcc -g -o cXcorreto.out cXcorreto.c
+
+# Rodar script para demonstrar erro
+script cXteste_pre
+
+# Rodar gdb
+gdb ./cX.out
+
+run
+
+quit
+
+# Rodar Valgrind
+valgrind --leak-check=full ./cX.out
+
+# Encerrar script
+exit
+
+# Rodar script para demonstrar correção
+script cXteste_pos
+
+# Rodar gdb
+gdb ./cXcorreto.out
+
+run
+
+quit
+
+# Rodar Valgrind
+valgrind --leak-check=full ./cXcorreto.out
+
+# Encerrar script
+exit
+
+# Fazer relatório
+Criar arquivo cXrelatorio.txt
+1) Identificar e descrever os erros do código.
+
+2) Colar script_pre
+
+3) Explicar as correções que devem ser realizadas.
+
+4) Colar script_pos

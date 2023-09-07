@@ -1,0 +1,41 @@
+Script started on 2023-09-07 15:59:44+00:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="177" LINES="19"]
+[0;32m@juliogdomingues [0m➜ [1;34m/workspaces/estruturas_de_dados_ufmg/lab03 [0;36m([1;31mlab03[0;36m) [0m$ gdb ./c3correto.out
+[35;1m[35;1mGNU gdb [m[35;1m(Ubuntu 9.2-0ubuntu1~20.04.1) [m[35;1m9.2[m[35;1m
+[m[mCopyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c3correto.out[m...
+(gdb) run
+Starting program: /workspaces/estruturas_de_dados_ufmg/lab03/c3correto.out 
+[Inferior 1 (process 63615) exited normally]
+(gdb) quit
+[0;32m@juliogdomingues [0m➜ [1;34m/workspaces/estruturas_de_dados_ufmg/lab03 [0;36m([1;31mlab03[0;36m) [0m$ gdb ./c3correto.outexit[Kvalgrind --leak-check=full ./c3.out[23Pgdb[C[C[C[C[C[C[C[C[C[23@valgrind --leak-check=full[C[C[C[C[C[C[C[C[Cc.outo.outr.outr.oute.outt.outo.out
+==63765== Memcheck, a memory error detector
+==63765== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==63765== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==63765== Command: ./c3correto.out
+==63765== 
+==63765== 
+==63765== HEAP SUMMARY:
+==63765==     in use at exit: 0 bytes in 0 blocks
+==63765==   total heap usage: 10 allocs, 10 frees, 4,000 bytes allocated
+==63765== 
+==63765== All heap blocks were freed -- no leaks are possible
+==63765== 
+==63765== For lists of detected and suppressed errors, rerun with: -s
+==63765== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[0;32m@juliogdomingues [0m➜ [1;34m/workspaces/estruturas_de_dados_ufmg/lab03 [0;36m([1;31mlab03[0;36m) [0m$ exit
+exit
+
+Script done on 2023-09-07 16:00:05+00:00 [COMMAND_EXIT_CODE="0"]
