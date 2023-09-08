@@ -1,7 +1,126 @@
-1) 
+Arquivo: c13.c
+
+1) O arquivo c13.c aloca memória para "p" duas vezes sem liberar a memória anteriormente alocada, causando vazamento de memória. Há uma liberação de memória antes de atribuir um novo bloco de memória a "p", podendo levar a problemas de acesso inválido se tentar usar "p" após a chamada "free". E não há verificação de erros para garantir que as alocações de memória foram bem-sucedidas.
 
 2)
+Script started on 2023-09-08 14:29:34-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="9"]
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ gdb ./c13.out
+[?2004l
+[35;1mGNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
 
-3) 
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c13.out[m...
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/samuel/Documentos/ED/estruturas_de_dados_ufmg/lab03/c13.out[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+[Inferior 1 (process 76315) exited normally]
+[?2004h[?2004l
+[?2004h(gdb) quit
+[?2004l
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ valgrind --leak-check=full ./c13.out
+[?2004l
+==76587== Memcheck, a memory error detector
+==76587== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==76587== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==76587== Command: ./c13.out
+==76587== 
+==76587== 
+==76587== HEAP SUMMARY:
+==76587==     in use at exit: 35 bytes in 2 blocks
+==76587==   total heap usage: 3 allocs, 1 frees, 47 bytes allocated
+==76587== 
+==76587== 16 bytes in 1 blocks are definitely lost in loss record 1 of 2
+==76587==    at 0x4E050B5: malloc (vg_replace_malloc.c:431)
+==76587==    by 0x1091A6: main (c13.c:11)
+==76587== 
+==76587== 19 bytes in 1 blocks are definitely lost in loss record 2 of 2
+==76587==    at 0x4E050B5: malloc (vg_replace_malloc.c:431)
+==76587==    by 0x10917E: main (c13.c:8)
+==76587== 
+==76587== LEAK SUMMARY:
+==76587==    definitely lost: 35 bytes in 2 blocks
+==76587==    indirectly lost: 0 bytes in 0 blocks
+==76587==      possibly lost: 0 bytes in 0 blocks
+==76587==    still reachable: 0 bytes in 0 blocks
+==76587==         suppressed: 0 bytes in 0 blocks
+==76587== 
+==76587== For lists of detected and suppressed errors, rerun with: -s
+==76587== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ 
+[K]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-09-08 14:30:58-03:00 [COMMAND_EXIT_CODE="0"]
+
+
+3) Para corrigir os erros, a cada alocação de memória para "p", há uma verificação se a alocação foi bem-sucedida e libera a memória quando não for mais necessária. Para verificar erros de alocação de memória, uma mensagem de erro é impressa e o programa retorna um código de erro 1.
 
 4)
+Script started on 2023-09-08 14:41:49-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="9"]
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ gdb ./c13correto.out
+[?2004l
+[35;1mGNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c13correto.out[m...
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/samuel/Documentos/ED/estruturas_de_dados_ufmg/lab03/c13correto.out[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+[Inferior 1 (process 78651) exited normally]
+[?2004h[?2004l
+[?2004h(gdb) quit
+[?2004l
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ valgrind lea[K[K[K--leak-check=full ./c13correto.out
+[?2004l
+==78783== Memcheck, a memory error detector
+==78783== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==78783== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==78783== Command: ./c13correto.out
+==78783== 
+==78783== 
+==78783== HEAP SUMMARY:
+==78783==     in use at exit: 0 bytes in 0 blocks
+==78783==   total heap usage: 3 allocs, 3 frees, 47 bytes allocated
+==78783== 
+==78783== All heap blocks were freed -- no leaks are possible
+==78783== 
+==78783== For lists of detected and suppressed errors, rerun with: -s
+==78783== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-09-08 14:42:41-03:00 [COMMAND_EXIT_CODE="0"]
