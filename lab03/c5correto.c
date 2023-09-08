@@ -7,6 +7,11 @@ const int ARR_SIZE = 1000;
 int main() {
     // create an array of ARR_SIZE ints
     int *intArray = malloc(sizeof(int) * ARR_SIZE);
+    if (intArray == NULL) // verificação de erro na alocação de memoria
+    {
+        perror("Error: memory allocation failed");
+        return 1;
+    }
 
     // populate them
     for (int i=0; i < ARR_SIZE; i++) {
@@ -20,7 +25,8 @@ int main() {
 
     printf("intArray[%d]: %d\n", randNum, intArray[randNum]);
 
-    // end without freeing!
+
+    free(intArray); // liberando a memória alocada
     return 0;
 }
 
