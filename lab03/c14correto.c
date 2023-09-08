@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main(void) {
-  int n, i, fact;
+  int n, i;
+  int fact = 1; // inicializando fact com valor 1
 
   printf("Positive integer:");
   scanf("%d", &n);
@@ -10,4 +11,5 @@ int main(void) {
     fact = fact*i;
 
   printf("Factorial %d = %d\n", n, fact);
+  return 0; // retorno para main
 }

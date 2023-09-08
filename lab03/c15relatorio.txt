@@ -1,6 +1,6 @@
 Arquivo: c15.c
 
-1) O
+1) O arquivo c15.c não possui problemas graves em termos de sintaxe e lógica, o Valgrind não detectou vazamentos de memória. Porém, ele termina com a saída 1, indicando que algo inesperado ocorreu, o problema estava na declaração da variável "int a = 1" dentro do loop, assim a função "inc(a)" não surtiria efeito.
 
 2)
 Script started on 2023-09-07 22:31:44-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="8"]
@@ -58,7 +58,7 @@ exit
 Script done on 2023-09-07 22:32:51-03:00 [COMMAND_EXIT_CODE="1"]
 
 
-3) 
+3) A variável "a" foi iniciada antes do loop, assim podemos ver se a função "inc(a)" está correta. A saída foi alterada para "a", pois não fazia sentido utilizar "argc" como saída tendo em vista que "argc" não está sendo utilizado.
 
 4)
 Script started on 2023-09-07 22:42:15-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="8"]
