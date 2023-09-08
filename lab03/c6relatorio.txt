@@ -1,7 +1,132 @@
-1) 
+Arquivo: c6.c
+
+1) O arquivo c6.c possui um progrema na função "resizeArray", onde é realocado o ponteiro "dPtr", mas não atualiza o campo "data" do struct "List". Além de não verificar se a alocação de memória foi bem sucedida.
 
 2)
+Script started on 2023-09-08 16:25:20-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="9"]
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ gdb ./c6.out
+[?2004l
+[35;1mGNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
 
-3) 
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c6.out[m...
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/samuel/Documentos/ED/estruturas_de_dados_ufmg/lab03/c6.out[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+[Inferior 1 (process 99697) exited normally]
+[?2004h[?2004l
+[?2004h(gdb) quit
+[?2004l
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ valgrind --leak-check=full ./c5.o[K[K[K5[K6p[K.ouy[Kt
+[?2004l
+==99926== Memcheck, a memory error detector
+==99926== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==99926== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==99926== Command: ./c6.out
+==99926== 
+==99926== Invalid free() / delete / delete[] / realloc()
+==99926==    at 0x4E07A87: free (vg_replace_malloc.c:974)
+==99926==    by 0x109215: main (c6.c:21)
+==99926==  Address 0x523e090 is 0 bytes inside a block of size 40 free'd
+==99926==    at 0x4E0A13B: realloc (vg_replace_malloc.c:1649)
+==99926==    by 0x1091B4: resizeArray (c6.c:12)
+==99926==    by 0x109202: main (c6.c:19)
+==99926==  Block was alloc'd at
+==99926==    at 0x4E09F35: calloc (vg_replace_malloc.c:1554)
+==99926==    by 0x1091EC: main (c6.c:18)
+==99926== 
+==99926== 
+==99926== HEAP SUMMARY:
+==99926==     in use at exit: 60 bytes in 1 blocks
+==99926==   total heap usage: 3 allocs, 3 frees, 116 bytes allocated
+==99926== 
+==99926== 60 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==99926==    at 0x4E0A13B: realloc (vg_replace_malloc.c:1649)
+==99926==    by 0x1091B4: resizeArray (c6.c:12)
+==99926==    by 0x109202: main (c6.c:19)
+==99926== 
+==99926== LEAK SUMMARY:
+==99926==    definitely lost: 60 bytes in 1 blocks
+==99926==    indirectly lost: 0 bytes in 0 blocks
+==99926==      possibly lost: 0 bytes in 0 blocks
+==99926==    still reachable: 0 bytes in 0 blocks
+==99926==         suppressed: 0 bytes in 0 blocks
+==99926== 
+==99926== For lists of detected and suppressed errors, rerun with: -s
+==99926== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-09-08 16:26:12-03:00 [COMMAND_EXIT_CODE="0"]
+
+3) Para correção dos erros é verificada se a alocação de memória foi bem-sucedida, caso falhe, o programa imprime uma mensagem de erro e retorna o array original sem modificações. Também é atualizado o campo "data" do struct "List" como um novo valor de "dPtr" após a realocação.
 
 4)
+Script started on 2023-09-08 16:33:01-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="9"]
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ gdb ./c6correto.out
+[?2004l
+[35;1mGNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c6correto.out[m...
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/samuel/Documentos/ED/estruturas_de_dados_ufmg/lab03/c6correto.out[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+[Inferior 1 (process 101501) exited normally]
+[?2004h[?2004l
+[?2004h(gdb) quit
+[?2004l
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ valgrind --leak-check=full ./c6correto.ouy[Kt
+[?2004l
+==101640== Memcheck, a memory error detector
+==101640== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==101640== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==101640== Command: ./c6correto.out
+==101640== 
+==101640== 
+==101640== HEAP SUMMARY:
+==101640==     in use at exit: 0 bytes in 0 blocks
+==101640==   total heap usage: 3 allocs, 3 frees, 116 bytes allocated
+==101640== 
+==101640== All heap blocks were freed -- no leaks are possible
+==101640== 
+==101640== For lists of detected and suppressed errors, rerun with: -s
+==101640== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-09-08 16:33:49-03:00 [COMMAND_EXIT_CODE="0"]

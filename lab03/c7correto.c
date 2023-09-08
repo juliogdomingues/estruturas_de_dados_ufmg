@@ -4,9 +4,10 @@
 
 int main() {
     char* alphabet = calloc(27, sizeof(char)); // alocando 27 bytes
-    if (alphabet == NULL)
+    if (alphabet == NULL)  // verificação de erro na alocação de memoria
     {
         perror("Error: memory allocation failed");
+        return 1;
     }
 
     for(uint8_t i = 0; i < 26; i++) {
