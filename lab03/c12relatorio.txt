@@ -1,6 +1,6 @@
 Arquivo: c12.c
 
-1) O arquivo c12.c possui um erro ao acessar a variável "x" antes de atribuir um valor a ela, podendo levar a comportamentod indefinidos ao tentar acessar uma variável não inicializada.
+1) O arquivo c12.c possui um erro ao acessar a variável "x" antes de atribuir um valor a ela, podendo levar a comportamentos indefinidos ao tentar acessar uma variável não inicializada.
 
 2)
 Script started on 2023-09-08 14:50:16-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="9"]

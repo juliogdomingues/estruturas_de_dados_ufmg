@@ -1,6 +1,6 @@
 Arquivo: c6.c
 
-1) O arquivo c6.c possui um progrema na função "resizeArray", onde é realocado o ponteiro "dPtr", mas não atualiza o campo "data" do struct "List". Além de não verificar se a alocação de memória foi bem sucedida.
+1) O arquivo c6.c possui um problema na função "resizeArray", em que é realocado o ponteiro "dPtr", mas não atualiza o campo "data" do struct "List". Além de não verificar se a alocação de memória foi bem sucedida.
 
 2)
 Script started on 2023-09-08 16:25:20-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="9"]
