@@ -1,0 +1,116 @@
+Arquivo: c15.c
+
+1) O arquivo c15.c não possui problemas graves em termos de sintaxe e lógica, o Valgrind não detectou vazamentos de memória. Porém, ele termina com a saída 1, indicando que algo inesperado ocorreu, o problema estava na declaração da variável "int a = 1" dentro do loop, assim a função "inc(a)" não surtiria efeito.
+
+2)
+Script started on 2023-09-07 22:31:44-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="8"]
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ gdb ./c15.c[Kout
+[?2004l
+[35;1mGNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c15.out[m...
+[?2004h(gdb) run][K
+[?2004l
+Starting program: [32m/home/samuel/Documentos/ED/estruturas_de_dados_ufmg/lab03/c15.out[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+[Inferior 1 (process 64363) exited with code 01]
+[?2004h[?2004l
+[?2004h(gdb) qyu[K[Kuit
+[?2004l
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ valgir[K[Krint[Kd --kea[K[K[Kleak-check=full ./c15correto.out
+[?2004l
+==64461== Memcheck, a memory error detector
+==64461== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==64461== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==64461== Command: ./c15correto.out
+==64461== 
+==64461== 
+==64461== HEAP SUMMARY:
+==64461==     in use at exit: 0 bytes in 0 blocks
+==64461==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==64461== 
+==64461== All heap blocks were freed -- no leaks are possible
+==64461== 
+==64461== For lists of detected and suppressed errors, rerun with: -s
+==64461== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-09-07 22:32:51-03:00 [COMMAND_EXIT_CODE="1"]
+
+
+3) A variável "a" foi iniciada antes do loop, assim podemos ver se a função "inc(a)" está correta. A saída foi alterada para "a", pois não fazia sentido utilizar "argc" como saída tendo em vista que "argc" não está sendo utilizado.
+
+4)
+Script started on 2023-09-07 22:42:15-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="8"]
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ c[Kgdb ./c2[K15correto.out
+[?2004l
+[35;1mGNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c15correto.out[m...
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/samuel/Documentos/ED/estruturas_de_dados_ufmg/lab03/c15correto.out[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+[Inferior 1 (process 66281) exited with code 01]
+[?2004h[?2004l
+[?2004h(gdb) quit
+[?2004l
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ ex[K[Kvalgrind --leak-check [K=full ./c15correto.out
+[?2004l
+==66483== Memcheck, a memory error detector
+==66483== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==66483== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==66483== Command: ./c15correto.out
+==66483== 
+==66483== 
+==66483== HEAP SUMMARY:
+==66483==     in use at exit: 0 bytes in 0 blocks
+==66483==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==66483== 
+==66483== All heap blocks were freed -- no leaks are possible
+==66483== 
+==66483== For lists of detected and suppressed errors, rerun with: -s
+==66483== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-09-07 22:43:06-03:00 [COMMAND_EXIT_CODE="1"]

@@ -1,0 +1,168 @@
+Arquivo: c10.c
+
+1) O arquivo c10.c possui um loop infinito e aloca memória dentro do loop sem liberá-la, causando vazamento de memória.  
+
+2)
+Script started on 2023-09-08 15:19:52-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="9"]
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ gdb ./20[K[K10[K[Kc10.out
+[?2004l
+[35;1mGNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c10.out[m...
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/samuel/Documentos/ED/estruturas_de_dados_ufmg/lab03/c10.out[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+
+// loop infinito...
+
+Program received signal SIGINT, Interrupt.
+[34m0x00007ffff7d14a37[m in [33m__GI___libc_write[m ([36mfd[m=1, [36mbuf[m=0x555555559330, [36mnbytes[m=15) at [32m../sysdeps/unix/sysv/linux/write.c[m:26
+26	../sysdeps/unix/sysv/linux/write.c: Arquivo ou diretório inexistente.
+[?2004h[?2004l
+[?2004h(gdb) quit
+[?2004l
+[?2004hA debugging session is active.
+
+	Inferior 1 [process 87140] will be killed.
+
+Quit anyway? (y or n) y
+[?2004l
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ valgrind --leak-check=full ./c10.out
+[?2004l
+==87257== Memcheck, a memory error detector
+==87257== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==87257== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==87257== Command: ./c10.out
+==87257== 
+// loop infinito... 
+==87257== Process terminating with default action of signal 2 (SIGINT)
+==87257==    at 0x512AA37: write (write.c:26)
+==87257==    by 0x50A0F6C: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==87257==    by 0x50A2A60: new_do_write (fileops.c:448)
+==87257==    by 0x50A2A60: _IO_new_do_write (fileops.c:425)
+==87257==    by 0x50A2A60: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==87257==    by 0x50A1754: _IO_new_file_xsputn (fileops.c:1243)
+==87257==    by 0x50A1754: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==87257==    by 0x508C049: outstring_func (vfprintf-internal.c:239)
+==87257==    by 0x508C049: __vfprintf_internal (vfprintf-internal.c:1593)
+==87257==    by 0x507681E: printf (printf.c:33)
+==87257==    by 0x10919D: main (c10.c:10)
+==87257== 
+==87257== HEAP SUMMARY:
+==87257==     in use at exit: 3,528,576 bytes in 27,560 blocks
+==87257==   total heap usage: 27,560 allocs, 0 frees, 3,528,576 bytes allocated
+==87257== 
+==87257== 3,527,424 bytes in 27,558 blocks are definitely lost in loss record 3 of 3
+==87257==    at 0x4E050B5: malloc (vg_replace_malloc.c:431)
+==87257==    by 0x10917E: main (c10.c:9)
+==87257== 
+==87257== LEAK SUMMARY:
+==87257==    definitely lost: 3,527,424 bytes in 27,558 blocks
+==87257==    indirectly lost: 0 bytes in 0 blocks
+==87257==      possibly lost: 0 bytes in 0 blocks
+==87257==    still reachable: 1,152 bytes in 2 blocks
+==87257==         suppressed: 0 bytes in 0 blocks
+==87257== Reachable blocks (those to which a pointer was found) are not shown.
+==87257== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==87257== 
+==87257== For lists of detected and suppressed errors, rerun with: -s
+==87257== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ exir[Kt
+[?2004l
+exit
+
+Script done on 2023-09-08 15:20:50-03:00 [COMMAND_EXIT_CODE="130"]
+
+
+3) Para corrigir os erros, foi definida a variável "maz_allocations" para limitar o número máximo de alocações de memória e o loop é executado até que o número máximo de alocações seja atingido. Há uma verificação se a alocação foi bem sucedida, imprimindo uma mensagem de erro e retornando um código de erro(1). A memória alocada é liberada com "free" antes de sair do programa, evitando vazamentos de memória.
+
+4)
+Script started on 2023-09-08 15:31:01-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="137" LINES="9"]
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ gdb ./c10correto.out
+[?2004l
+[35;1mGNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+[?2004h--Type <RET> for more, q to quit, c to continue without paging--
+[?2004l
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./c10correto.out[m...
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/samuel/Documentos/ED/estruturas_de_dados_ufmg/lab03/c10correto.out[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+93824992252576
+93824992252576
+93824992252576
+93824992252576
+93824992252576
+93824992252576
+93824992252576
+93824992252576
+93824992252576
+93824992252576
+[Inferior 1 (process 89311) exited normally]
+[?2004h[?2004l
+[?2004h(gdb) quirt[K[Kt
+[?2004l
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ valf[Kgrind --leak-check=10[K[Kfull ./c10correto.out
+[?2004l
+==89371== Memcheck, a memory error detector
+==89371== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==89371== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==89371== Command: ./c10correto.out
+==89371== 
+86237248
+86238528
+86238720
+86238912
+86239104
+86239296
+86239488
+86239680
+86239872
+86240064
+==89371== 
+==89371== HEAP SUMMARY:
+==89371==     in use at exit: 0 bytes in 0 blocks
+==89371==   total heap usage: 11 allocs, 11 frees, 2,304 bytes allocated
+==89371== 
+==89371== All heap blocks were freed -- no leaks are possible
+==89371== 
+==89371== For lists of detected and suppressed errors, rerun with: -s
+==89371== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[?2004h]0;samuel@samuel-Vostro-15-3515: ~/Documentos/ED/estruturas_de_dados_ufmg/lab03[01;32msamuel@samuel-Vostro-15-3515[00m:[01;34m~/Documentos/ED/estruturas_de_dados_ufmg/lab03[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-09-08 15:31:45-03:00 [COMMAND_EXIT_CODE="0"]
