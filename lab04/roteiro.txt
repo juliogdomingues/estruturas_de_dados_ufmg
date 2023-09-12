@@ -1,0 +1,31 @@
+1) Avalie qualitativamente o programa a ser caracterizado em termos dos acessos de memória esperados e localidade de referência. Identifique as estruturas de dados e segmentos de código críticos (p.ex., mais custosos)
+2) Elabore o plano de caracterização de localidade de referência
+3) Selecione os parâmetros do programa a ser caracterizado
+    a. Programa não deve executar por muito ou pouco tempo, mas o suficiente para entender o comportamento do algoritmo.
+4) Execute o código com Cachegrind:
+    valgrind --tool=cachegrind ./matop -m -x 5 -y 5
+    cg_annotate cachegrind.out.XXXX
+5) Execute o código com Callgrind
+    valgrind --tool=callgrind  ./matop -m -x 5 -y 5
+    callgrind_annotate callgrind.out.XXXX
+6) Avalie a saída do CacheGrind identificando:
+    a. Quão bem o programa se comporta em termos de memória
+    b. Estruturas de dados a serem caracterizadas
+    c. Segmentos de código a serem instrumentados
+
+Ferramentas: keycache grind
+site do Valgrind
+
+
+--------------
+2a parte
+7) Instrumente o código
+    Use a biblioteca memlog
+8) Execute os experimentos do código instrumentado
+9) Analise, utilizando  os padrões de acesso e a localidade de referência
+    a. Use o aplicativo analisamem
+    b. Visualizações
+        i. Mapa de Acesso
+        ii. Histograma de distância de pilha
+        iii. Evolução da distância de pilha
+10) Sugira, se for o caso, modificações no código ou na estrutura de dados
