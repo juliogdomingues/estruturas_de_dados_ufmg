@@ -206,33 +206,23 @@ Ir
 Ir      file:function
 --------------------------------------------------------------------------------
 71,545  /build/glibc-SzIz7B/glibc-2.31/elf/dl-addr.c:_dl_addr [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
-36,307  /build/glibc-SzIz7B/glibc-2.31/elf/dl-tunables.c:__GI___tunables_init [/usr/lib/x86_64-linux-gnu/ld-2
-.31.so]
+36,307  /build/glibc-SzIz7B/glibc-2.31/elf/dl-tunables.c:__GI___tunables_init [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
 25,533  /build/glibc-SzIz7B/glibc-2.31/elf/dl-lookup.c:do_lookup_x [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
-22,563  /build/glibc-SzIz7B/glibc-2.31/elf/dl-lookup.c:_dl_lookup_symbol_x [/usr/lib/x86_64-linux-gnu/ld-2.31
-.so]
-21,207  /build/glibc-SzIz7B/glibc-2.31/stdio-common/printf_fp.c:__printf_fp_l [/usr/lib/x86_64-linux-gnu/libc
--2.31.so]
+22,563  /build/glibc-SzIz7B/glibc-2.31/elf/dl-lookup.c:_dl_lookup_symbol_x [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
+21,207  /build/glibc-SzIz7B/glibc-2.31/stdio-common/printf_fp.c:__printf_fp_l [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
 18,681  /build/glibc-SzIz7B/glibc-2.31/elf/../sysdeps/x86_64/dl-machine.h:_dl_relocate_object
 11,487  /build/glibc-SzIz7B/glibc-2.31/elf/dl-tunables.h:__GI___tunables_init
-10,928  /build/glibc-SzIz7B/glibc-2.31/stdio-common/vfprintf-internal.c:__vfprintf_internal [/usr/lib/x86_64-
-linux-gnu/libc-2.31.so]
+10,928  /build/glibc-SzIz7B/glibc-2.31/stdio-common/vfprintf-internal.c:__vfprintf_internal [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
  9,622  /build/glibc-SzIz7B/glibc-2.31/elf/do-rel.h:_dl_relocate_object
- 6,827  /build/glibc-SzIz7B/glibc-2.31/stdio-common/printf_fp.c:hack_digit [/usr/lib/x86_64-linux-gnu/libc-2.
-31.so]
+ 6,827  /build/glibc-SzIz7B/glibc-2.31/stdio-common/printf_fp.c:hack_digit [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
  6,240  src/mat.c:multiplicaMatrizes [/workspaces/estruturas_de_dados_ufmg/lab04/bin/matop]
  6,034  /build/glibc-SzIz7B/glibc-2.31/stdlib/divrem.c:__mpn_divrem [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
- 5,754  /build/glibc-SzIz7B/glibc-2.31/libio/fileops.c:_IO_file_xsputn@@GLIBC_2.2.5 [/usr/lib/x86_64-linux-gn
-u/libc-2.31.so]
+ 5,754  /build/glibc-SzIz7B/glibc-2.31/libio/fileops.c:_IO_file_xsputn@@GLIBC_2.2.5 [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
  5,497  /build/glibc-SzIz7B/glibc-2.31/elf/dl-lookup.c:check_match [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
- 5,219  /build/glibc-SzIz7B/glibc-2.31/string/../sysdeps/x86_64/strcmp.S:strcmp [/usr/lib/x86_64-linux-gnu/ld
--2.31.so]
- 5,162  /build/glibc-SzIz7B/glibc-2.31/libio/fileops.c:_IO_file_overflow@@GLIBC_2.2.5 [/usr/lib/x86_64-linux-
-gnu/libc-2.31.so]
- 3,198  /build/glibc-SzIz7B/glibc-2.31/stdlib/../sysdeps/x86_64/mul_1.S:__mpn_mul_1 [/usr/lib/x86_64-linux-gn
-u/libc-2.31.so]
- 1,921  /build/glibc-SzIz7B/glibc-2.31/string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__mempcpy_avx_unaligned_erms [/usr/lib/x86_64-l
-inux-gnu/libc-2.31.so]
+ 5,219  /build/glibc-SzIz7B/glibc-2.31/string/../sysdeps/x86_64/strcmp.S:strcmp [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
+ 5,162  /build/glibc-SzIz7B/glibc-2.31/libio/fileops.c:_IO_file_overflow@@GLIBC_2.2.5 [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
+ 3,198  /build/glibc-SzIz7B/glibc-2.31/stdlib/../sysdeps/x86_64/mul_1.S:__mpn_mul_1 [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
+ 1,921  /build/glibc-SzIz7B/glibc-2.31/string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__mempcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
  1,717  /build/glibc-SzIz7B/glibc-2.31/elf/dl-version.c:_dl_check_map_versions [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
  1,588  src/mat.c:inicializaMatrizNula [/workspaces/estruturas_de_dados_ufmg/lab04/bin/matop]
  1,551  /build/glibc-SzIz7B/glibc-2.31/libio/genops.c:__overflow [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
@@ -259,8 +249,7 @@ inux-gnu/libc-2.31.so]
    598  /build/glibc-SzIz7B/glibc-2.31/elf/dl-hwcaps.c:_dl_important_hwcaps [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
    588  /build/glibc-SzIz7B/glibc-2.31/elf/dl-load.c:open_verify.constprop.0 [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
    585  /build/glibc-SzIz7B/glibc-2.31/elf/get-dynamic-info.h:_dl_map_object_from_fd
-   583  /build/glibc-SzIz7B/glibc-2.31/string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-li
-nux-gnu/libc-2.31.so]
+   583  /build/glibc-SzIz7B/glibc-2.31/string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc-2.31.so]
    581  /build/glibc-SzIz7B/glibc-2.31/elf/dl-load.c:open_path [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
    576  /build/glibc-SzIz7B/glibc-2.31/elf/dl-minimal.c:malloc [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
    549  /build/glibc-SzIz7B/glibc-2.31/stdio-common/../libio/libioP.h:__vfprintf_internal
