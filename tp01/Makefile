@@ -6,8 +6,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/avexp.o $(OBJ)/satisf.o
-HDRS = $(INC)/avexp.hpp $(INC)/satisf.hpp
+OBJS = $(OBJ)/main.o $(OBJ)/avexp.o $(OBJ)/satisf.o $(OBJ)/pilha.o
+HDRS = $(INC)/pilha.hpp $(INC)/avexp.hpp $(INC)/satisf.hpp
 CFLAGS = -Wall -pg -c -I$(INC)
 
 EXE = $(BIN)/main
@@ -15,7 +15,9 @@ EXE = $(BIN)/main
 all: run
 
 run:  $(EXE)
-	$(EXE) -a "teste" 12
+	$(EXE) -a "0 | 1" 01
+	$(EXE) -a "0 | 1 & 2" 010
+	$(EXE) -a "~ ( 0 | 1 ) & 2" 101
 	$(EXE) -s "teste" 10
 
 $(BIN)/main: $(OBJS)
@@ -23,6 +25,9 @@ $(BIN)/main: $(OBJS)
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp
+
+$(OBJ)/pilha.o: $(HDRS) $(SRC)/pilha.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/pilha.o $(SRC)/pilha.cpp 
 
 $(OBJ)/avexp.o: $(HDRS) $(SRC)/avexp.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/avexp.o $(SRC)/avexp.cpp 
