@@ -1,6 +1,7 @@
 #ifndef GRAPH_HPP
 #define GRAPH_HPP
 
+#include "./listaadj.hpp"
 /*  Você pode inserir os includes necessários para que sua classe funcione.
  * Nenhuma outra alteração neste arquivo é permitida
  */
@@ -8,7 +9,7 @@
 
 class Grafo{
     public:
-        Grafo(bool debug);
+        Grafo();
         ~Grafo();
 
         void InsereVertice();
