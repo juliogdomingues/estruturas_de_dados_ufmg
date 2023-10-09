@@ -1,6 +1,25 @@
 #include <iostream>
 #include "../include/listaadj.hpp"
 
+TipoCelula::TipoCelula() {}
+
+TipoItem::TipoItem() {}
+
+TipoItem::TipoItem(TipoChave c) {
+    chave = c;
+}
+
+void TipoItem::SetChave(TipoChave c) {
+    chave = c;
+}
+
+TipoChave TipoItem::GetChave() {
+    return chave;
+}
+
+void TipoItem::Imprime() {
+    std::cout << "Chave: " << chave << std::endl;
+}
 
 ListaAdjacencia::ListaAdjacencia() {
     primeiro = new TipoCelula();
