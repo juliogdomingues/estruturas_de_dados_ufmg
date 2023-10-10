@@ -23,13 +23,13 @@ OBJS = $(OBJ)/main.o $(OBJ)/graph.o $(OBJ)/listaadj.o
 HDRS = $(INC)/graph.hpp $(INC)/listaadj.hpp $(INC)/msgassert.h
 CFLAGS = -g -Wall -c -I$(INC)
 
-EXE = $(BIN)/main
+EXE = $(BIN)/pa06
 
 all: $(EXE)
 	
 
-$(BIN)/main: $(OBJS)
-	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)
+$(BIN)/pa06: $(OBJS)
+	$(CC) -pg -o $(BIN)/pa06 $(OBJS) $(LIBS)
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
