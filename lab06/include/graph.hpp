@@ -22,15 +22,18 @@ class Grafo{
         int GrauMinimo();
         int GrauMaximo();
 
+        bool GrafoCompleto();
+
         void ImprimeVizinhos(int v);
         
     private:
         
-        /*  Você deve implementar ListaAdjacencia como um TAD que irá armazenar
+        /*  Você deve implementar ListaEncadeada como um TAD que irá armazenar
          * os dados do grafo. Lembrando que este TAD deve ser uma lista 
          * encadeada
          */
-        ListaAdjacencia vertices;
+        ListaEncadeada vertices;
+        ListaEncadeada *GetAdjacentes(int vertex);
 };
 
 #endif

@@ -20,16 +20,20 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/main.o $(OBJ)/graph.o $(OBJ)/listaadj.o 
-HDRS = $(INC)/graph.hpp $(INC)/listaadj.hpp $(INC)/msgassert.h
+HDRS = $(INC)/graph.hpp $(INC)/listaadj.hpp
 CFLAGS = -g -Wall -c -I$(INC)
 
-EXE = $(BIN)/pa06
+EXE = $(BIN)/pa6.out
 
 all: $(EXE)
-	
 
-$(BIN)/pa06: $(OBJS)
-	$(CC) -pg -o $(BIN)/pa06 $(OBJS) $(LIBS)
+test: $(EXE)
+	$(EXE) -d < test.txt
+	$(EXE) -n < test.txt
+	$(EXE) -k < test.txt
+	
+$(BIN)/pa6.out: $(OBJS)
+	$(CC) -pg -o $(BIN)/pa6.out $(OBJS) $(LIBS)
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 

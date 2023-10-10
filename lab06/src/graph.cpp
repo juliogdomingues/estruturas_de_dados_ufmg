@@ -9,20 +9,19 @@ Grafo::Grafo() {
 
 Grafo::~Grafo() {
     // Destrutor: pode ser usado para liberar recursos, se necessário
+    // Delete lista de adjacentes de cada vertice
 }
 
 void Grafo::InsereVertice() {
     // Insere um vértice no grafo
-    vertices.InsereFinal(TipoItem());
+    TipoItem vertex = TipoItem();
+    ListaEncadeada *adjacentes = new ListaEncadeada();
+    vertex.SetValor(adjacentes);
+    vertices.InsereFinal(vertex);
 }
 
 void Grafo::InsereAresta(int v, int w) {
-    // Insere uma aresta entre os vértices v e w no grafo
-    TipoItem item_w(w);
-    vertices.InsereFinal(item_w);
-
-    TipoItem item_v(v);
-    vertices.InsereFinal(item_v);
+    GetAdjacentes(v)->InsereFinal(TipoItem(w));
 }
 
 int Grafo::QuantidadeVertices() {
@@ -33,14 +32,18 @@ int Grafo::QuantidadeVertices() {
 int Grafo::QuantidadeArestas() {
     // Retorna o número de arestas no grafo
     // Considerando que cada chamada de InsereAresta insere duas arestas, divida o tamanho da lista por 2
-    return vertices.GetTamanho() / 2;
+    int numArestas = 0;
+    for (int i = 0; i < vertices.GetTamanho(); i++) {
+        numArestas += GetAdjacentes(i)->GetTamanho();
+    }
+    return numArestas / 2;
 }
 
 int Grafo::GrauMinimo() {
     // Calcula e retorna o grau mínimo no grafo
     int grauMinimo = INT_MAX; // Inicializa com um valor grande
     for (int i = 0; i < vertices.GetTamanho(); i++) {
-        int grau = vertices.GetItem(i).GetChave();
+        int grau = GetAdjacentes(i)->GetTamanho();
         if (grau < grauMinimo) {
             grauMinimo = grau;
         }
@@ -52,7 +55,7 @@ int Grafo::GrauMaximo() {
     // Calcula e retorna o grau máximo no grafo
     int grauMaximo = 0;
     for (int i = 0; i < vertices.GetTamanho(); i++) {
-        int grau = vertices.GetItem(i).GetChave();
+        int grau = GetAdjacentes(i)->GetTamanho();
         if (grau > grauMaximo) {
             grauMaximo = grau;
         }
@@ -62,13 +65,18 @@ int Grafo::GrauMaximo() {
 
 void Grafo::ImprimeVizinhos(int v) {
     // Imprime os vizinhos do vértice v
-    std::cout << "Vizinhos de " << v << ": ";
-    for (int i = 0; i < vertices.GetTamanho(); i++) {
-        int vizinho = vertices.GetItem(i).GetChave();
-        if (vizinho == v) {
-            continue; // Não imprime o próprio vértice como vizinho
-        }
-        std::cout << vizinho << " ";
+    ListaEncadeada *adjacentes = GetAdjacentes(v);
+    for (int i = 0; i < adjacentes->GetTamanho(); i++) {
+        std::cout << adjacentes->GetItem(i).GetChave() << " ";
     }
-    std::cout << std::endl;
+}
+
+bool Grafo::GrafoCompleto() {
+    int numVertices = QuantidadeVertices();
+    return QuantidadeArestas() == numVertices * (numVertices - 1) / 2;
+}
+
+ListaEncadeada *Grafo::GetAdjacentes(int vertex) {
+    TipoItem vertexItem = vertices.GetItem(vertex);
+    return ((ListaEncadeada *)(vertexItem.GetValor()));
 }

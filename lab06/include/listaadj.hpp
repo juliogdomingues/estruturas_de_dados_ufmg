@@ -2,18 +2,23 @@
 #define LISTAADJ_HPP
 
 typedef int TipoChave; // TipoChave é um inteiro
+typedef void *TipoValor;
 
 class TipoItem
 {
     public:
         TipoItem();
         TipoItem(TipoChave c);
+        TipoItem(TipoValor v);
         void SetChave(TipoChave c);
+        void SetValor(TipoValor v);
         TipoChave GetChave();
+        TipoValor GetValor();
         void Imprime();
 
     private:
         TipoChave chave;
+        TipoValor valor;
         // outros membros
 };
 
@@ -48,13 +53,13 @@ class TipoCelula
         TipoItem item;
         TipoCelula *prox;
 
-    friend class ListaAdjacencia;
+    friend class ListaEncadeada;
 };
 
-class ListaAdjacencia : public Lista {
+class ListaEncadeada : public Lista {
     public:
-        ListaAdjacencia();
-        ~ListaAdjacencia();
+        ListaEncadeada();
+        ~ListaEncadeada();
 
         TipoItem GetItem(int pos);
         void SetItem(TipoItem item, int pos);

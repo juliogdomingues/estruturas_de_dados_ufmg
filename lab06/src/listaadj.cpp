@@ -3,7 +3,9 @@
 
 TipoCelula::TipoCelula() {}
 
-TipoItem::TipoItem() {}
+TipoItem::TipoItem() {
+    chave = 0;
+}
 
 TipoItem::TipoItem(TipoChave c) {
     chave = c;
@@ -13,34 +15,42 @@ void TipoItem::SetChave(TipoChave c) {
     chave = c;
 }
 
+void TipoItem::SetValor(TipoValor v) {
+    valor = v;
+}
+
 TipoChave TipoItem::GetChave() {
     return chave;
+}
+
+TipoValor TipoItem::GetValor() {
+    return valor;
 }
 
 void TipoItem::Imprime() {
     std::cout << "Chave: " << chave << std::endl;
 }
 
-ListaAdjacencia::ListaAdjacencia() {
+ListaEncadeada::ListaEncadeada() {
     primeiro = new TipoCelula();
     ultimo = primeiro;
 };
 
-ListaAdjacencia::~ListaAdjacencia()
+ListaEncadeada::~ListaEncadeada()
 {
     Limpa();
     delete primeiro;
 };
 
-TipoCelula* ListaAdjacencia::Posiciona(int pos, bool antes=false){
+TipoCelula* ListaEncadeada::Posiciona(int pos, bool antes=false){
     TipoCelula *p; int i;
 
-    if ( (pos > tamanho) || (pos <= 0) )
+    if ( (pos > tamanho) || (pos < 0) )
         throw "ERRO: Posicao Invalida!";
 
     // Posiciona na célula anterior a desejada
     p = primeiro;
-    for(i=1; i<pos; i++){
+    for(i=0; i<pos; i++){
         p = p->prox;
     }
     // vai para a próxima 
@@ -51,21 +61,21 @@ TipoCelula* ListaAdjacencia::Posiciona(int pos, bool antes=false){
     return p;
 };
 
-TipoItem ListaAdjacencia::GetItem(int pos){
+TipoItem ListaEncadeada::GetItem(int pos){
     TipoCelula *p;
 
     p = Posiciona(pos);
     return p->item;
 };
 
-void ListaAdjacencia::SetItem(TipoItem item, int pos){
+void ListaEncadeada::SetItem(TipoItem item, int pos){
     TipoCelula *p;
 
     p = Posiciona(pos);
     p->item = item;
 };
 
-void ListaAdjacencia::InsereInicio(TipoItem item) {
+void ListaEncadeada::InsereInicio(TipoItem item) {
     TipoCelula *nova;
 
     nova = new TipoCelula();
@@ -78,7 +88,7 @@ void ListaAdjacencia::InsereInicio(TipoItem item) {
         ultimo = nova;
 };
 
-void ListaAdjacencia::InsereFinal(TipoItem item) {
+void ListaEncadeada::InsereFinal(TipoItem item) {
     TipoCelula *nova;
 
     nova = new TipoCelula();
@@ -89,7 +99,7 @@ void ListaAdjacencia::InsereFinal(TipoItem item) {
 
 };
 
-void ListaAdjacencia::InserePosicao(TipoItem item, int pos) {
+void ListaEncadeada::InserePosicao(TipoItem item, int pos) {
     TipoCelula *p, *nova;
 
     p = Posiciona(pos,true); // posiciona na célula anterior
@@ -104,7 +114,7 @@ void ListaAdjacencia::InserePosicao(TipoItem item, int pos) {
         ultimo = nova;
 };
 
-TipoItem ListaAdjacencia::RemoveInicio() {;
+TipoItem ListaEncadeada::RemoveInicio() {;
     TipoItem aux;
     TipoCelula *p;
 
@@ -122,7 +132,7 @@ TipoItem ListaAdjacencia::RemoveInicio() {;
     return aux;
 }
 
-TipoItem ListaAdjacencia::RemoveFinal() {
+TipoItem ListaEncadeada::RemoveFinal() {
     TipoItem aux;
     TipoCelula *p;
 
@@ -142,7 +152,7 @@ TipoItem ListaAdjacencia::RemoveFinal() {
 }
 
 
-TipoItem ListaAdjacencia::RemovePosicao(int pos) {;
+TipoItem ListaEncadeada::RemovePosicao(int pos) {;
     TipoItem aux;
     TipoCelula *p, *q;
 
@@ -162,7 +172,7 @@ TipoItem ListaAdjacencia::RemovePosicao(int pos) {;
 }
 
 
-TipoItem  ListaAdjacencia::Pesquisa(TipoChave c) {
+TipoItem  ListaEncadeada::Pesquisa(TipoChave c) {
     TipoItem aux;
     TipoCelula *p;
 
@@ -183,7 +193,7 @@ TipoItem  ListaAdjacencia::Pesquisa(TipoChave c) {
  };
 
 
-void ListaAdjacencia::Imprime() {
+void ListaEncadeada::Imprime() {
     TipoCelula *p;
 
     p = primeiro->prox;
@@ -195,7 +205,7 @@ void ListaAdjacencia::Imprime() {
     printf("\n");
 };
 
-void ListaAdjacencia::Limpa() {
+void ListaEncadeada::Limpa() {
     TipoCelula *p;
 
     p = primeiro->prox;
