@@ -7,7 +7,7 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/main.o $(OBJ)/avexp.o $(OBJ)/satisf.o $(OBJ)/pilha.o
-HDRS = $(INC)/pilha.hpp $(INC)/avexp.hpp $(INC)/satisf.hpp
+HDRS = $(INC)/pilha.hpp $(INC)/avexp.hpp $(INC)/satisf.hpp $(INC)/msgassert.h
 CFLAGS = -Wall -pg -c -I$(INC)
 
 EXE = $(BIN)/main
@@ -15,6 +15,8 @@ EXE = $(BIN)/main
 all: run
 
 run:  $(EXE)
+
+test:  $(EXE)
 	$(EXE) -a "0 | 1" 01
 	$(EXE) -a "0 | 1 & 2" 010
 	$(EXE) -a "~ ( 0 | 1 ) & 2" 101

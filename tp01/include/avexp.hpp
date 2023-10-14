@@ -3,10 +3,24 @@
 
 #include <cstring>
 #include <iostream>
-// #include "./pilha.hpp"
 
-int precedencia(char op);
-bool aplicarOperador(char op, bool operando1, bool operando2);
-int avaliadorExpressoes(const std::string& formula, const std::string& valoracao);
+#include "../include/pilha.hpp"
+
+class ExpressaoLogica {
+    private:
+        PilhaEncadeada operadores;
+        PilhaEncadeada valores;
+        bool valoresVariaveis[100] = {false};
+        int tamanho;
+
+    public:
+        ExpressaoLogica(std::string formula, std::string valoracao);
+        ExpressaoLogica() {};
+        int precedencia(char op);
+        char aplicarOperador(char op, char operando1, char operando2);
+        PilhaEncadeada getPilha() { return valores; };
+        bool avaliar();
+        void toPostfix(std::string formula, std::string valoracao);
+};
 
 #endif

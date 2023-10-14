@@ -1,43 +1,57 @@
 #include "../include/pilha.hpp"
 
-PilhaArranjo::PilhaArranjo()
+TipoCelula::TipoCelula()
 {
-    topo = -1;
+    item = -1; // Initialize with a char value
+    prox = nullptr;
 }
 
-void PilhaArranjo::Empilha(char item)
+PilhaEncadeada::PilhaEncadeada() : Pilha()
 {
-    if (tamanho == MAXTAM)
-        throw "A pilha está cheia!";
+    topo = nullptr;
+}
 
-    topo++;
-    itens[topo] = item;
+PilhaEncadeada::~PilhaEncadeada()
+{
+    Limpa();
+}
+
+void PilhaEncadeada::Empilha(char item){
+    TipoCelula *nova;
+
+    nova = new TipoCelula();
+    nova->item = item;
+    nova->prox = topo;
+    topo = nova;
     tamanho++;
-}
+};
 
-char PilhaArranjo::Desempilha()
-{
-    char aux;
 
-    if (tamanho == 0)
+char PilhaEncadeada::Desempilha(){
+    char aux; TipoCelula *p;
+
+    if(tamanho == 0)
         throw "A pilha está vazia!";
 
-    aux = itens[topo];
-    topo--;
+    aux = topo->item;
+    p = topo;
+    topo = topo->prox;
+    delete p;
     tamanho--;
+
     return aux;
+};
+
+char PilhaEncadeada::GetTopo() {
+    if (topo != NULL) {
+        return topo->item;
+    } else {
+        // Handle the case when the stack is empty. You can throw an exception or return a default value.
+        throw std::runtime_error("A pilha está vazia!"); // Or return a default TipoItem object
+    }
 }
 
-void PilhaArranjo::Limpa()
-{
-    topo = -1;
-    tamanho = 0;
-}
-
-char PilhaArranjo::GetTopo() const
-{
-    if (tamanho == 0)
-        throw "A pilha está vazia!";
-    
-    return itens[topo];
+void PilhaEncadeada::Limpa(){
+    while(!Vazia())
+        Desempilha();
 }

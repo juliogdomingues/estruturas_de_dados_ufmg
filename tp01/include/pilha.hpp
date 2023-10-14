@@ -1,6 +1,38 @@
 #ifndef TP1_ED_PILHA_H
 #define TP1_ED_PILHA_H
 
+#include <iostream>
+
+// typedef int TipoChave; // TipoChave é um inteiro
+// typedef char TipoItem; // TipoItem é um char
+
+class TipoCelula
+{
+    public:
+        TipoCelula();
+
+    private:
+        char item;
+        TipoCelula *prox;
+
+    friend class PilhaEncadeada;
+};
+
+class TipoItem
+{
+    public:
+        TipoItem();
+        TipoItem(char c);
+        void SetChave(char c);
+        char GetChave();
+        void Imprime();
+
+    private:
+        char chave;
+        // outros membros
+};
+
+
 class Pilha
 {
 public:
@@ -16,20 +48,20 @@ protected:
     int tamanho;
 };
 
-class PilhaArranjo : public Pilha
+class PilhaEncadeada : public Pilha
 {
-public:
-    PilhaArranjo();
+    public:
+        PilhaEncadeada();
+        virtual ~PilhaEncadeada();
 
-    void Empilha(char item);
-    char Desempilha();
-    void Limpa();
-    char GetTopo() const;
+        void Empilha(char item);
+        char Desempilha();
+        char GetTopo();
 
-private:
-    int topo;
-    static const int MAXTAM = 100;
-    char itens[MAXTAM];
+        void Limpa();
+
+    private:
+        TipoCelula* topo;
 };
 
 #endif
