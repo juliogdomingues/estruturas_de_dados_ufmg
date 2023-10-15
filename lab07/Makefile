@@ -19,8 +19,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/heap.o $(OBJ)/listaadj.o 
-HDRS = $(INC)/heap.hpp $(INC)/listaadj.hpp
+OBJS = $(OBJ)/main.o $(OBJ)/heap.o
+HDRS = $(INC)/heap.hpp
 CFLAGS = -g -Wall -c -I$(INC)
 
 EXE = $(BIN)/pa7.out
