@@ -20,7 +20,7 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/main.o $(OBJ)/unionFind.o
-HDRS = $(INC)/unionFind.hpp
+HDRS = $(INC)/unionFind.hpp $(INC)/heap.hpp
 CFLAGS = -g -Wall -c -I$(INC)
 
 EXE = $(BIN)/pa8.out
@@ -36,11 +36,11 @@ $(BIN)/pa8.out: $(OBJS)
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
 
+$(OBJ)/heap.o: $(HDRS) $(SRC)/heap.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/heap.o $(SRC)/heap.cpp 
+
 $(OBJ)/unionFind.o: $(HDRS) $(SRC)/unionFind.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/unionFind.o $(SRC)/unionFind.cpp 
 
-$(OBJ)/listaadj.o: $(HDRS) $(SRC)/listaadj.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/listaadj.o $(SRC)/listaadj.cpp
-	
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out

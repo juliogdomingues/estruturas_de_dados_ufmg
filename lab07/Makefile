@@ -38,9 +38,6 @@ $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 
 $(OBJ)/heap.o: $(HDRS) $(SRC)/heap.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/heap.o $(SRC)/heap.cpp 
-
-$(OBJ)/listaadj.o: $(HDRS) $(SRC)/listaadj.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/listaadj.o $(SRC)/listaadj.cpp
 	
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
