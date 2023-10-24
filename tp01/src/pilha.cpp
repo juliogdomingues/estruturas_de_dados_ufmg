@@ -1,57 +1,69 @@
 #include "../include/pilha.hpp"
 
-TipoCelula::TipoCelula()
+template <typename T>
+TipoCelula<T>::TipoCelula()
 {
-    item = -1; // Initialize with a char value
     prox = nullptr;
 }
 
-PilhaEncadeada::PilhaEncadeada() : Pilha()
+template <typename T>
+PilhaEncadeada<T>::PilhaEncadeada() : Pilha<T>()
 {
     topo = nullptr;
 }
 
-PilhaEncadeada::~PilhaEncadeada()
+template <typename T>
+void PilhaEncadeada<T>::Empilha(T item)
 {
-    Limpa();
-}
-
-void PilhaEncadeada::Empilha(char item){
-    TipoCelula *nova;
-
-    nova = new TipoCelula();
+    TipoCelula<T> *nova;
+    nova = new TipoCelula<T>();
     nova->item = item;
     nova->prox = topo;
     topo = nova;
-    tamanho++;
-};
+    this->tamanho++;
+}
 
+template <typename T>
+T PilhaEncadeada<T>::Desempilha()
+{
+    T aux;
+    TipoCelula<T> *p;
 
-char PilhaEncadeada::Desempilha(){
-    char aux; TipoCelula *p;
-
-    if(tamanho == 0)
+    if (this->tamanho == 0)
         throw "A pilha está vazia!";
 
     aux = topo->item;
     p = topo;
     topo = topo->prox;
+
     delete p;
-    tamanho--;
+    this->tamanho--;
 
     return aux;
-};
+}
 
-char PilhaEncadeada::GetTopo() {
-    if (topo != NULL) {
+template <typename T>
+T PilhaEncadeada<T>::GetTopo()
+{
+    if (topo != nullptr)
+    {
         return topo->item;
-    } else {
-        // Handle the case when the stack is empty. You can throw an exception or return a default value.
-        throw std::runtime_error("A pilha está vazia!"); // Or return a default TipoItem object
+    }
+    else
+    {
+        throw std::runtime_error("A pilha está vazia!");
     }
 }
 
-void PilhaEncadeada::Limpa(){
-    while(!Vazia())
+template <typename T>
+void PilhaEncadeada<T>::Limpa()
+{
+    while (!this->Vazia())
         Desempilha();
 }
+
+// Explicit instantiation for supported types (char and int)
+template class TipoCelula<char>;
+template class TipoCelula<int>;
+template class PilhaEncadeada<char>;
+template class PilhaEncadeada<int>;

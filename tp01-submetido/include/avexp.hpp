@@ -13,18 +13,18 @@ class ExpressaoLogica {
     private:
         std::string formula;
         std::string valoracao;
-        PilhaEncadeada<char> operadoresStack; 
-        PilhaEncadeada<int> variaveisStack; 
+        PilhaEncadeada operadoresStack;
+        PilhaEncadeada variaveisStack;
         bool operador(char character);
         int precedencia(char op);
         void avaliarProximaOperacao();
-        int valorDaVariavel(int variavel);
-        
+        char valorDaVariavel(char variavel);
+
     public:
         ExpressaoLogica(std::string formula, std::string valoracao);
         ExpressaoLogica() {};
         ~ExpressaoLogica() { Limpa(); };
-        char aplicarOperador(char op, int operando1, int operando2);
+        char aplicarOperador(char op, char operando1, char operando2);
         bool avaliar();
         void Limpa();
 };

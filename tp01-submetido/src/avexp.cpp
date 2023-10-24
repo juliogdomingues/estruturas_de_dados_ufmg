@@ -9,30 +9,19 @@ ExpressaoLogica::ExpressaoLogica(std::string formula, std::string valoracao)
             throw std::invalid_argument("Tamanho de entrada excede os limites.");
         }
     } catch (const std::exception &e) {
-        std::cerr << "Erro na inicialização: " << e.what() << std::endl;
-        throw;
+    std::cerr << "Erro na inicialização: " << e.what() << std::endl;
+    throw;
     }
+
 bool ExpressaoLogica::avaliar() {
     for (unsigned int i = 0; i < formula.size(); i++) {
         char caractere = formula[i];
         if (caractere != ' ') {
-            if (std::isdigit(caractere)) {
-                // Coleta dígitos consecutivos para formar um número
-                std::string numeroStr;
-                while (i < formula.size() && std::isdigit(formula[i])) {
-                    numeroStr += formula[i];
-                    i++;
-                }
-                i--; // Volta um passo para compensar a iteração extra no loop
-
-                int numero = std::stoi(numeroStr); // Converte a string em um número inteiro
-
-                std::cout << "Empilhando variável: " << valorDaVariavel(numero) << std::endl;
-                variaveisStack.Empilha(valorDaVariavel(numero));
-            } else if (operador(caractere)) {
+            if (operador(caractere)) {
                 if (caractere == '(') {
                     operadoresStack.Empilha(caractere);
-                } else if (caractere == ')') {
+                }
+                else if (caractere == ')') { 
                     while (operadoresStack.GetTopo() != '(') {
                         avaliarProximaOperacao();
                     }
@@ -43,17 +32,16 @@ bool ExpressaoLogica::avaliar() {
                     }
                     operadoresStack.Empilha(caractere);
                 }
+            } else {
+                variaveisStack.Empilha(valorDaVariavel(caractere));
             }
         }
     }
     while (!operadoresStack.Vazia()) {
-        avaliarProximaOperacao();
+        avaliarProximaOperacao();        
     }
-    int resultado = variaveisStack.GetTopo();
-    std::cout << "Resultado final: " << resultado << std::endl;
-    return resultado == 1;
+    return variaveisStack.GetTopo() == '1';
 }
-
 
 bool ExpressaoLogica::operador(char character) {
     return character == '&' || character == '|' || character == '~' || character == '(' || character == ')';
@@ -68,39 +56,32 @@ int ExpressaoLogica::precedencia(char op) {
 
 void ExpressaoLogica::avaliarProximaOperacao() {
     char operador = operadoresStack.Desempilha();
-    int operando1 = variaveisStack.Desempilha();
-    int operando2 = 0;
-
+    char operando1 = variaveisStack.Desempilha();
+    char operando2 = '\0';
     if (operador != '~') {
         operando2 = variaveisStack.Desempilha();
     }
-
-    int resultado = aplicarOperador(operador, operando1, operando2);
-    std::cout << "Operando1: " << operando1 << ", Operando2: " << operando2 << ", Operador: " << operador << ", Resultado: " << resultado << std::endl;
-    variaveisStack.Empilha(resultado);
+    variaveisStack.Empilha(aplicarOperador(operador, operando1, operando2));
 }
 
-int ExpressaoLogica::valorDaVariavel(int variavel) {
-    int valor = 0;
-    while (variavel < valoracao.size() && isdigit(valoracao[variavel])) {
-        valor = valor * 10 + (valoracao[variavel] - '0');
-        variavel++;
-    }
-    return valor;
+char ExpressaoLogica::valorDaVariavel(char variavel) {
+    int indice = variavel - '0';
+    return valoracao[indice];
 }
 
-char ExpressaoLogica::aplicarOperador(char op, int operando1, int operando2) {
+char ExpressaoLogica::aplicarOperador(char op, char operando1, char operando2) {
     // operadores unários
-    if (op == '~') return (operando1 == 1) ? 0 : 1;
+    if (op == '~') return (operando1 == '1') ? '0' : '1';
 
     // operadores binários
-    if (op == '&') return (operando1 == 1 && operando2 == 1) ? 1 : 0;
-    if (op == '|') return (operando1 == 1 || operando2 == 1) ? 1 : 0;
+    if (op == '&') return (operando1 == '1' && operando2 == '1') ? '1' : '0';
+    if (op == '|') return (operando1 == '1' || operando2 == '1') ? '1' : '0';
 
-    return 0;
+    return '0';
 }
 
 void ExpressaoLogica::Limpa() {
     variaveisStack.Limpa();
     operadoresStack.Limpa();
 }
+

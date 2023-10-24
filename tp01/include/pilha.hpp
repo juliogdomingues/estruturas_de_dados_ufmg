@@ -3,36 +3,21 @@
 
 #include <iostream>
 
-// typedef int TipoChave; // TipoChave é um inteiro
-// typedef char TipoItem; // TipoItem é um char
-
+template <typename T>
 class TipoCelula
 {
-    public:
-        TipoCelula();
+public:
+    TipoCelula();
 
-    private:
-        char item;
-        TipoCelula *prox;
+private:
+    T item;
+    TipoCelula *prox;
 
+    template <typename U>
     friend class PilhaEncadeada;
 };
 
-class TipoItem
-{
-    public:
-        TipoItem();
-        TipoItem(char c);
-        void SetChave(char c);
-        char GetChave();
-        void Imprime();
-
-    private:
-        char chave;
-        // outros membros
-};
-
-
+template <typename T>
 class Pilha
 {
 public:
@@ -40,28 +25,27 @@ public:
     int GetTamanho() { return tamanho; };
     bool Vazia() { return tamanho == 0; };
 
-    virtual void Empilha(char item) = 0;
-    virtual char Desempilha() = 0;
+    virtual void Empilha(T item) = 0;
+    virtual T Desempilha() = 0;
     virtual void Limpa() = 0;
 
 protected:
     int tamanho;
 };
 
-class PilhaEncadeada : public Pilha
+template <typename T>
+class PilhaEncadeada : public Pilha<T>
 {
-    public:
-        PilhaEncadeada();
-        virtual ~PilhaEncadeada();
+public:
+    PilhaEncadeada();
+    ~PilhaEncadeada() { Limpa(); };
+    void Empilha(T item);
+    T Desempilha();
+    T GetTopo();
+    void Limpa();
 
-        void Empilha(char item);
-        char Desempilha();
-        char GetTopo();
-
-        void Limpa();
-
-    private:
-        TipoCelula* topo;
+private:
+    TipoCelula<T> *topo;
 };
 
 #endif

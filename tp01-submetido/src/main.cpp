@@ -67,14 +67,12 @@ int main(int argc, char **argv) {
         parse_args(argc, argv, opcao, argumento1, argumento2);
 
         if (opcao == OPTION_A) {
-            ExpressaoLogica *av = new ExpressaoLogica(argumento1.c_str(), argumento2.c_str());
-            bool resultado = av->avaliar();
+            ExpressaoLogica av = ExpressaoLogica(argumento1.c_str(), argumento2.c_str());
+            bool resultado = av.avaliar();
             std::cout << resultado << std::endl;
-            delete av;
         } else if (opcao == OPTION_S) {
-            Satisfaz *resultado = new Satisfaz(argumento1.c_str(), argumento2.c_str());
-            resultado->avaliaSatisfaz();
-            delete resultado;
+            Satisfaz resultado = Satisfaz(argumento1.c_str(), argumento2.c_str());
+            resultado.avaliaSatisfaz();
         } else {
             std::cerr << "Opção inválida." << std::endl;
             exit(1);
