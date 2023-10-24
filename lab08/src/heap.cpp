@@ -1,34 +1,33 @@
 #include <algorithm>
 #include "../include/heap.hpp"
 
-Heap::Heap(int maxsize) {
+Heap::Heap(int maxsize) : maxsize(maxsize) {
     tamanho = 0;
-    data = new int[maxsize];
+    data = new Aresta[maxsize];
 }
 
 Heap::~Heap() {
     delete[] data;
 }
 
-void Heap::Inserir(int x) {
-    if (tamanho == 0) {
-        data[0] = x;
-        tamanho++;
-    } else {
+void Heap::Inserir(Aresta aresta) {
+    if (tamanho < maxsize) {
         int posicao = tamanho;
-        data[posicao] = x;
+        data[posicao] = aresta;
         tamanho++;
 
         HeapifyPorCima(posicao);
     }
 }
 
-int Heap::Remover() {
+Aresta Heap::Remover() {
+    Aresta aresta_invalida = { -1, -1, -1 };
+
     if (tamanho == 0) {
-        return -1;
+        return aresta_invalida;
     }
 
-    int raiz = data[0];
+    Aresta raiz = data[0];
     data[0] = data[tamanho - 1];
     tamanho--;
 
@@ -53,15 +52,16 @@ int Heap::GetSucessorDir(int posicao) {
     return 2 * posicao + 2;
 }
 
+
 void Heap::HeapifyPorBaixo(int posicao) {
     int menor = posicao;
     int esq = GetSucessorEsq(posicao);
     int dir = GetSucessorDir(posicao);
 
-    if (esq < tamanho && data[esq] < data[menor]) {
+    if (esq < tamanho && data[esq].custo < data[menor].custo) {
         menor = esq;
     }
-    if (dir < tamanho && data[dir] < data[menor]) {
+    if (dir < tamanho && data[dir].custo < data[menor].custo) {
         menor = dir;
     }
     if (menor != posicao) {
@@ -73,7 +73,7 @@ void Heap::HeapifyPorBaixo(int posicao) {
 void Heap::HeapifyPorCima(int posicao) {
     int ancestral = GetAncestral(posicao);
 
-    if (posicao > 0 && data[posicao] < data[ancestral]) {
+    if (posicao > 0 && data[posicao].custo < data[ancestral].custo) {
         std::swap(data[posicao], data[ancestral]);
         HeapifyPorCima(ancestral);
     }

@@ -13,19 +13,21 @@ int main() {
     for (int i = 0; i < m; ++i) {
         int u, v, c;
         std::cin >> u >> v >> c;
-        minHeap.Inserir(c);
+        Aresta aresta = {u, v, c};
+
+        minHeap.Inserir(aresta);
     }
 
     UnionFind unionFind(n);
 
     while (!minHeap.Vazio() && contaUnioes < n - 1) {
-        int aresta = minHeap.Remover();
-        int u = unionFind.Find(aresta);
-        int v = unionFind.Find(minHeap.Remover());
+        Aresta aresta = minHeap.Remover();
+        int u = unionFind.Find(aresta.u);
+        int v = unionFind.Find(aresta.v);
 
         if (u != v) {
             unionFind.Union(u, v);
-            custo += aresta;
+            custo += aresta.custo;
             contaUnioes++;
         }
     }
