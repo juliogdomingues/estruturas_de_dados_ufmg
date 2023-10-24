@@ -3,22 +3,34 @@
 #include "../include/unionFind.hpp"
 
 int main() {
-    int n;
-    std::cin >> n;
+    int n, m;
+    int contaUnioes = 0, custo = 0;
+
+    std::cin >> n >> m;
 
     Heap minHeap(n);
 
-    for (int i = 0; i < n; ++i) {
-        int num;
-        std::cin >> num;
-        minHeap.Inserir(num);
+    for (int i = 0; i < m; ++i) {
+        int u, v, c;
+        std::cin >> u >> v >> c;
+        minHeap.Inserir(c);
     }
 
-    while (!minHeap.Vazio()) {
-        std::cout << minHeap.Remover() << " ";
+    UnionFind unionFind(n);
+
+    while (!minHeap.Vazio() && contaUnioes < n - 1) {
+        int aresta = minHeap.Remover();
+        int u = unionFind.Find(aresta);
+        int v = unionFind.Find(minHeap.Remover());
+
+        if (u != v) {
+            unionFind.Union(u, v);
+            custo += aresta;
+            contaUnioes++;
+        }
     }
-    
-    std::cout << std::endl;
+
+    std::cout << custo << std::endl;
 
     return 0;
 }

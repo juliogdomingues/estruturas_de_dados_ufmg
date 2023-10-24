@@ -19,7 +19,7 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/unionFind.o
+OBJS = $(OBJ)/main.o $(OBJ)/unionFind.o $(OBJ)/heap.o
 HDRS = $(INC)/unionFind.hpp $(INC)/heap.hpp
 CFLAGS = -g -Wall -c -I$(INC)
 
@@ -28,7 +28,8 @@ EXE = $(BIN)/pa8.out
 all: $(EXE)
 
 test: $(EXE)
-	$(EXE) -d < test.txt
+	$(EXE) -d < test1.txt
+	$(EXE) -d < test2.txt
 	
 $(BIN)/pa8.out: $(OBJS)
 	$(CC) -pg -o $(BIN)/pa8.out $(OBJS) $(LIBS)
