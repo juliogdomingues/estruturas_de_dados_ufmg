@@ -8,7 +8,7 @@ int main() {
 
     std::cin >> n >> m;
 
-    Heap minHeap(m);
+    Heap minHeap(n);
 
     for (int i = 0; i < m; ++i) {
         int u, v, c;
