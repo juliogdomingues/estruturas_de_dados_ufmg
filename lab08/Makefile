@@ -19,25 +19,28 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/heap.o
-HDRS = $(INC)/heap.hpp
+OBJS = $(OBJ)/main.o $(OBJ)/unionFind.o
+HDRS = $(INC)/unionFind.hpp $(INC)/heap.hpp
 CFLAGS = -g -Wall -c -I$(INC)
 
-EXE = $(BIN)/pa7.out
+EXE = $(BIN)/pa8.out
 
 all: $(EXE)
 
 test: $(EXE)
 	$(EXE) -d < test.txt
 	
-$(BIN)/pa7.out: $(OBJS)
-	$(CC) -pg -o $(BIN)/pa7.out $(OBJS) $(LIBS)
+$(BIN)/pa8.out: $(OBJS)
+	$(CC) -pg -o $(BIN)/pa8.out $(OBJS) $(LIBS)
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
 
 $(OBJ)/heap.o: $(HDRS) $(SRC)/heap.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/heap.o $(SRC)/heap.cpp 
-	
+
+$(OBJ)/unionFind.o: $(HDRS) $(SRC)/unionFind.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/unionFind.o $(SRC)/unionFind.cpp 
+
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
