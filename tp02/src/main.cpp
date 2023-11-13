@@ -1,96 +1,91 @@
-#include <iostream>
+#include <algorithm>
+#include <cassert>
 #include <cstring>
 #include <getopt.h>
+#include <iostream>
 #include <stdexcept>
 
-#include "../include/avexp.hpp"
-#include "../include/pilha.hpp"
-#include "../include/satisf.hpp"
+#include <chrono>
+#include <fstream>
 
-// Defina constantes para opções
-const char OPTION_B = 'b';
-const char OPTION_S = 's';
-const char OPTION_I = 'i';
-const char OPTION_Q = 'q';
-const char OPTION_M = 'm';
-const char OPTION_P = 'p';
-const char OPTION_Y = 'y';
 
-int vertices = 0;
+#include "../include/sort.hpp"
+#include "../include/item.hpp"
 
-void parse_args(int argc, char **argv, char &opcao, std::string &argumento1, std::string &argumento2) {
-    int c = 0;
-    extern char *optarg;
+int main() {
 
-    opcao = '\0';
+auto start = std::chrono::high_resolution_clock::now();
 
-    if (argc != 4) {
-        std::cerr << "Forneça a quantidade correta de argumentos." << std::endl;
-        exit(1);
-    }
+    char metodo;
+    int nVertices;
+    int max = 0;
 
-    while ((c = getopt(argc, argv, "b:s:i:q:m:p:y")) != -1) {
-        switch (c) {
-            case OPTION_B:
-            case OPTION_S:
-            case OPTION_Q:
-            case OPTION_M:
-            case OPTION_P:
-            case OPTION_Y:
-                if (opcao == '\0') {
-                    opcao = c;
-                    if (optarg && optarg[0] != '\0') {
-                        vertices = optarg;
-                    } else {
-                        std::cerr << "O argumento não pode ser vazio." << std::endl;
-                        exit(1);
-                    }
-                } else {
-                    std::cerr << "Escolha apenas uma opção de ordenação (b, s, i, q, m, p, y)" << std::endl;
-                    exit(1);
-                }
-                break;
-            default:
-                std::cerr << "Uso: " << argv[0] << " -x [método de ordenação] <número de vértices>" << std::endl;
-                exit(1);
-        }
-    }
-
-    if (opcao == '\0') {
-        std::cerr << "Escolha apenas uma opção de ordenação (b, s, i, q, m, p, y)" << std::endl;
-        exit(1);
-    }
-
-    if (optind < argc) {
-        argumento2 = argv[optind];
-    } else {
-        std::cerr << "Faltando o segundo argumento." << std::endl;
-        exit(1);
-    }
-}
-
-int main(int argc, char **argv) {
-    try {
-        char opcao;
-        std::string argumento1, argumento2;
-
-        parse_args(argc, argv, opcao, argumento1, argumento2);
-
-        if (opcao == OPTION_A) {
-            ExpressaoLogica av = ExpressaoLogica(argumento1.c_str(), argumento2.c_str());
-            bool resultado = av.avaliar();
-            std::cout << resultado << std::endl;
-        } else if (opcao == OPTION_S) {
-            Satisfaz resultado = Satisfaz(argumento1.c_str(), argumento2.c_str());
-            resultado.avaliaSatisfaz();
-        } else {
-            std::cerr << "Opção inválida." << std::endl;
-            exit(1);
-        }
-        
-        return 0;
-    } catch (const std::exception &e) {
-        std::cerr << "Erro: " << e.what() << std::endl;
+    if (!(std::cin >> metodo >> nVertices)) {
+        std::cerr << "Erro ao ler entrada.\n";
         return 1;
     }
+
+    // Verifica se o número de vértices é positivo
+    if (nVertices <= 0) {
+        std::cerr << "Número de vértices deve ser positivo.\n";
+        return 1;
+    }
+
+    Grafo *grafo = new Grafo(nVertices);
+    try {
+        grafo = new Grafo(nVertices);
+    } catch (const std::bad_alloc& e) {
+        std::cerr << "Falha na alocação de memória: " << e.what() << '\n';
+        return 1;
+    }
+
+    for (int i = 0; i < nVertices; i++) {
+        int numeroVizinhos, adjacente;
+        std::cin >> numeroVizinhos;
+
+        for (int j = 0; j < numeroVizinhos; j++) {
+            std::cin >> adjacente;
+            grafo->insereAresta(i, adjacente);
+        }
+    }
+
+    for (int i = 0; i < nVertices; i++) {
+        int corVertice;
+        std::cin >> corVertice;
+        grafo->setCor(i, corVertice); // Define a cor de cada vértice
+        if (corVertice > max) max = corVertice;
+    }
+
+    Ordenacao ordenacao(grafo); 
+    Vetor& vertices = grafo->getVertices(); // Obtém os vértices do grafo
+
+    // Verifica se a coloração é gulosa
+    int resultadoColoracao = grafo->Greedy(grafo->getGrafo(), grafo->getVertices(), nVertices);
+
+    // Imprime o resultado da verificação
+    if (resultadoColoracao == 0) {
+        std::cout << "0" << std::endl;
+    } else {
+        std::cout << "1 ";
+        ordenacao.Ordena(metodo); // Ordena os vértices
+
+        for (unsigned int i = 0; i < vertices.getTamanho(); ++i) {
+            std::cout << vertices[i].chave << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    delete grafo; // Liberar a memória alocada
+
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    
+    std::cout << "Tempo de execução: " << duration.count() << " microssegundos" << std::endl;
+
+std::ofstream file("resultados.txt");
+file << "Tempo de execução para o método " << metodo << ": " << duration.count() << " microssegundos" << std::endl;
+file.close();
+
+    return 0;
 }

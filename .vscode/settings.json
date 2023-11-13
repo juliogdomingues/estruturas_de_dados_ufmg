@@ -66,6 +66,13 @@
     "mutex": "cpp",
     "ratio": "cpp",
     "variant": "cpp",
-    "memlog.h": "c"
+    "memlog.h": "c",
+    "__tree": "cpp",
+    "csignal": "cpp",
+    "iomanip": "cpp",
+    "map": "cpp",
+    "set": "cpp",
+    "unordered_set": "cpp",
+    "__memory": "cpp"
   }
 }
