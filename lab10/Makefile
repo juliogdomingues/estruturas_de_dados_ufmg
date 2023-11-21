@@ -8,7 +8,7 @@
 #   		: make clean - remove objetos e executável
 #---------------------------------------------------------------------
 
-CC = gcc
+CC = g++
 LIBS = -lm
 SRC = src
 OBJ = obj

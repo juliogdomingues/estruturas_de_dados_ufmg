@@ -1,7 +1,7 @@
 #ifndef SET_HPP
 #define SET_HPP
 
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 typedef struct s_table_elem{
@@ -36,6 +36,7 @@ class StringSet{
         int Hash(string s);
         void Rehash(int pos);
         void Resize(size_t tamanho);
+        static const int HASH_FACTOR = 31; // Fator usado na função de hash
 };
 
 

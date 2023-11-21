@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+
 #include "../include/Set.hpp"
 
 using namespace std;
@@ -14,7 +15,6 @@ StringSet* LeConjunto(){
     }
     return s;
 }
-
 
 int main(int argc, char** argv){
     int n;
