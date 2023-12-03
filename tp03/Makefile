@@ -20,6 +20,9 @@ test: $(EXE)
 	$(EXE) < test2.txt # esperado: 1 0 | 0 0
 	$(EXE) < test3.txt # esperado: 7 5 | 5 7 | 5464 2989
 	$(EXE) < test4.txt # esperado: 1 1
+	$(EXE) < genTest1.txt
+	$(EXE) < genTest2.txt
+	$(EXE) < genTest3.txt
 	
 $(BIN)/tp3.out: $(OBJS)
 	$(CC) -pg -o $(BIN)/tp3.out $(OBJS) $(LIBS)

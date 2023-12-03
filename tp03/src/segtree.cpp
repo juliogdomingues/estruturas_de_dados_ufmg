@@ -1,8 +1,8 @@
 #include <iostream>
 #include "../include/segtree.hpp"
 
-Matrix multiplyMatrix(const Matrix &a, const Matrix &b) {
-    Matrix result;
+Matriz multiplicaMatriz(const Matriz &a, const Matriz &b) {
+    Matriz result;
 
     #ifdef DEBUG
     std::cout << "Multiplicando matrizes:\n";
@@ -30,16 +30,16 @@ Matrix multiplyMatrix(const Matrix &a, const Matrix &b) {
 
 void segTree::build(int p, int l, int r) {
     if (l == r) {
-        seg[p] = Matrix(); // Matriz identidade
+        seg[p] = Matriz(); // Matriz identidade
         return;
     }
     int m = (l + r) / 2;
     build(2 * p, l, m);
     build(2 * p + 1, m + 1, r);
-    seg[p] = multiplyMatrix(seg[2 * p], seg[2 * p + 1]);
+    seg[p] = multiplicaMatriz(seg[2 * p], seg[2 * p + 1]);
 }
 
-void segTree::update(int i, const Matrix &newValue, int p, int l, int r) {
+void segTree::update(int i, const Matriz &newValue, int p, int l, int r) {
 
     #ifdef DEBUG
     std::cout << "Atualizando índice: " << i << " na posição: " << p << ", intervalo: [" << l << ", " << r << "]\n";
@@ -54,7 +54,7 @@ void segTree::update(int i, const Matrix &newValue, int p, int l, int r) {
     int m = (l + r) / 2;
     update(i, newValue, 2 * p, l, m);
     update(i, newValue, 2 * p + 1, m + 1, r);
-    seg[p] = multiplyMatrix(seg[2 * p], seg[2 * p + 1]);
+    seg[p] = multiplicaMatriz(seg[2 * p], seg[2 * p + 1]);
 
     #ifdef DEBUG
     // Log da matriz resultante no nó atual após a atualização
@@ -63,13 +63,13 @@ void segTree::update(int i, const Matrix &newValue, int p, int l, int r) {
     #endif
 }
 
-Matrix segTree::query(int a, int b, int p, int l, int r) {
+Matriz segTree::query(int a, int b, int p, int l, int r) {
 
     #ifdef DEBUG
     std::cout << "Consultando intervalo: [" << a << ", " << b << "] na posição: " << p << ", intervalo: [" << l << ", " << r << "]\n";
     #endif
 
-    if (a > r || b < l) return Matrix(); // Retorna a matriz identidade
+    if (a > r || b < l) return Matriz(); // Retorna a matriz identidade
     if (a <= l && r <= b) {
 
         #ifdef DEBUG
@@ -80,9 +80,9 @@ Matrix segTree::query(int a, int b, int p, int l, int r) {
         return seg[p];
     }
     int m = (l + r) / 2;
-    Matrix left = query(a, b, 2 * p, l, m);
-    Matrix right = query(a, b, 2 * p + 1, m + 1, r);
-    Matrix result = multiplyMatrix(left, right);
+    Matriz left = query(a, b, 2 * p, l, m);
+    Matriz right = query(a, b, 2 * p + 1, m + 1, r);
+    Matriz result = multiplicaMatriz(left, right);
 
     #ifdef DEBUG
     // Log da matriz resultante da consulta
