@@ -1,56 +1,42 @@
 #include <iostream>
-#include <chrono>
-#include <fstream>
+
+#include "../include/matriz.hpp"
 #include "../include/segtree.hpp"
 
-int main() {
-    auto start = std::chrono::high_resolution_clock::now();
 
+int main() {
     int instantesTempo, nOperacoes;
-    if (!(std::cin >> instantesTempo >> nOperacoes)) {
-        std::cerr << "Erro ao ler entrada.\n";
+    if (!(std::cin >> instantesTempo >> nOperacoes) || instantesTempo <= 0 || nOperacoes < 0) {
+        std::cerr << "Erro: Entrada inválida para instantes de tempo ou número de operações.\n";
         return 1;
     }
 
-    segTree st; // Cria instância da segTree
-    st.build(1, 0, MAX - 1);
+    SegTree* st = new SegTree(instantesTempo); // Cria instância da SegTree    
 
     for (int i = 0; i < nOperacoes; i++) {
         char operacao;
+        int tempo, a, b, c, d;
+        int t0, td, x, y;
+
         std::cin >> operacao;
         if (operacao == 'u') {
-            long long int tempo, a, b, c, d;
-            std::cin >> tempo >> a >> b >> c >> d;
-            Matriz newMatrix(a, b, c, d);
-            st.update(tempo, newMatrix, 1, 0, MAX - 1);
+            if (!(std::cin >> tempo >> a >> b >> c >> d) || tempo < 0 || tempo >= instantesTempo) {
+                std::cerr << "Erro: Entrada inválida para operação de atualização.\n";
+                continue;
+            }
+            Matriz m(a, b, c, d);
+            st->atualiza(1, 0, instantesTempo-1, tempo, m);
         } else if (operacao == 'q') {
-            int t0, td, x, y;
-            std::cin >> t0 >> td >> x >> y;
-
-            Matriz resultado = st.query(t0, td, 1, 0, MAX - 1);
-            int finalX = (resultado.m[0][0] * x + resultado.m[0][1] * y) % MOD;
-            int finalY = (resultado.m[1][0] * x + resultado.m[1][1] * y) % MOD;
-
-            std::cout << finalX << " " << finalY << std::endl;
-
-            #ifdef DEBUG
-            std::cout << "Matriz de transformação final:\n";
-            std::cout << resultado.m[0][0] << " " << resultado.m[0][1] << "\n" << resultado.m[1][0] << " " << resultado.m[1][1] << "\n";
-            std::cout << "Aplicando transformação ao ponto (" << x << ", " << y << ")\n";
-            std::cout << "Ponto transformado: (" << finalX << ", " << finalY << ")\n";
-            #endif
+            if (!(std::cin >> t0 >> td >> x >> y) || t0 < 0 || td >= instantesTempo || t0 > td) {
+                std::cerr << "Erro: Entrada inválida para operação de consulta.\n";
+                continue;
+            }
+            Matriz m = st->consulta(1, 0, instantesTempo-1, t0, td);
+            Matriz resultado = multiplica(m, Matriz(x, 0, y, 0));
+            std::cout << resultado.pegaIndice(0, 0) << " " << resultado.pegaIndice(1, 0) << std::endl;
         }
     }
 
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    
-    #ifdef DEBUG
-    std::cout << "Tempo de execução: " << duration.count() << " microssegundos" << std::endl;
-    #endif
-    std::ofstream file("resultadoados.txt");
-    file << "Tempo de execução para o método " << nOperacoes << ": " << duration.count() << " microssegundos" << std::endl;
-    file.close();
-
+    delete st;
     return 0;
 }
