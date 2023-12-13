@@ -16,7 +16,15 @@ ExpressaoLogica::ExpressaoLogica(std::string formula, std::string valoracao)
 bool ExpressaoLogica::avaliar() {
     for (unsigned int i = 0; i < formula.size(); i++) {
         char caractere = formula[i];
-        if (caractere != ' ') {
+
+        // Verifique se o caractere atual e o próximo são dígitos (para índices de dois dígitos)
+        if (isdigit(caractere) && (i + 1 < formula.size()) && isdigit(formula[i + 1])) {
+            // Combine o caractere atual e o próximo para formar um índice de dois dígitos
+            std::string indice = "";
+            indice += caractere;
+            indice += formula[i + 1];
+            i++; // Pula o próximo caractere, já que ele faz parte do índice de dois dígitos
+        } else if (caractere != ' ') {
             if (operador(caractere)) {
                 if (caractere == '(') {
                     operadoresStack.Empilha(caractere);
